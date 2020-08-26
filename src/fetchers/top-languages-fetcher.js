@@ -9,7 +9,7 @@ const fetcher = (variables, token) => {
       query userInfo($login: String!) {
         user(login: $login) {
           # fetch only owner repos & not forks
-          repositories(ownerAffiliations: OWNER, isFork: false, first: 100) {
+          repositories(ownerAffiliations: [OWNER, ORGANIZATION_MEMBER, COLLABORATOR], isFork: false, first: 100) {
             nodes {
               languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
                 edges {
@@ -47,6 +47,7 @@ async function fetchTopLanguages(username) {
 
   repoNodes = repoNodes
     .filter((node) => {
+      console.log("HOLA " + node.languages.edges);
       return node.languages.edges.length > 0;
     })
     // flatten the list of language nodes
