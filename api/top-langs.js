@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
       CONSTANTS.ONE_DAY
     );
 
-    res.setHeader("Cache-Control", `public, max-age=${cacheSeconds}`);
+    //res.setHeader("Cache-Control", `public, max-age=${cacheSeconds}`);
 
     return res.send(
       renderTopLanguages(topLangs, {
